@@ -1,0 +1,15 @@
+---
+# defaults file for letsencrypt
+
+letsencrypt_packages:
+  - python-pip
+
+letsencrypt_additional_packages: []
+
+letsencrypt_pip_packages:
+  - setuptools
+  - certbot
+
+letsencrypt_additional_pip_packages: []
+
+# letsencrypt_config_files: cli.ini.j2

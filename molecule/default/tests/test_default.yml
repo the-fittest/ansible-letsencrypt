@@ -1,0 +1,20 @@
+---
+
+file:
+  /etc/letsencrypt:
+    exists: true
+    mode: "0755"
+    owner: root
+    group: root
+    filetype: directory
+    contains: []
+  /etc/letsencrypt/cli.ini:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+package:
+  python-pip:
+    installed: true

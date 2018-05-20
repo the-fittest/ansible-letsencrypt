@@ -1,0 +1,47 @@
+{
+  "name": "letsencrypt",
+  "version": "1.0.0",
+  "description": "A role to setup letsencrypt",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://github.com/brandfrisch/letsencrypt.git"
+  },
+  "author": "Alexander Jaeger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brandfrisch/letsencrypt/issues"
+  },
+  "homepage": "https://github.com/brandfrisch/letsencrypt#readme",
+  "scripts": {
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "precommit": "yamllint . && ansible-lint -R -r ./node_modules/ansible-lint-rules/rules . || exit 1",
+    "develop": "nodemon"
+  },
+  "commitlint": {
+    "extends": [
+      "./node_modules/@commitlint/config-conventional"
+    ]
+  },
+  "nodemonConfig": {
+    "exec": "yamllint . && ansible-lint -R -r ./node_modules/ansible-lint-rules/rules . || exit 1",
+    "ext": "yml"
+  },
+  "release": {
+    "tagFormat": "${version}",
+    "verifyConditions": [],
+    "publish": [
+      {
+        "path": "@semantic-release/github"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^6.1.2",
+    "@commitlint/config-conventional": "^6.1.2",
+    "@semantic-release/exec": "^2.0.1",
+    "husky": "^0.14.3",
+    "semantic-release": "^13.4.1",
+    "nodemon": "^1.17.1",
+    "ansible-lint-rules": "^1.0.1"
+  }
+}

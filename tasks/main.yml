@@ -1,0 +1,50 @@
+---
+# tasks file for letsencrypt
+
+- name: Install package requirements
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ letsencrypt_packages }}"
+    - "{{ letsencrypt_additional_packages }}"
+  tags:
+    - package
+    - letsencrypt
+
+- name: Install pip requirements
+  pip:
+    name: "{{ item }}"
+    executable: /usr/bin/pip
+    state: present
+  with_items:
+    - "{{ letsencrypt_pip_packages }}"
+    - "{{ letsencrypt_additional_pip_packages }}"
+  tags:
+    - package
+    - letsencrypt
+
+- name: Create config directory
+  file:
+    path: /etc/letsencrypt
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+  tags:
+    - setup
+    - letsencrypt
+
+- name: Configure letsencrypt
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: "{{ item.mode }}"
+  with_items:
+    - "{{ letsencrypt_config_files }}"
+  no_log: true
+  tags:
+    - config
+    - letsencrypt
