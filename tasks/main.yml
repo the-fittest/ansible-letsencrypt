@@ -1,6 +1,16 @@
 ---
 # tasks file for letsencrypt
 
+- name: Manage user accounts
+  user:
+    name: letsencrypt
+    groups: ssl-cert
+    system: true
+    state: present
+  tags:
+    - setup
+    - letsencrypt
+
 - name: Install package requirements
   package:
     name: "{{ item }}"
@@ -26,11 +36,15 @@
 
 - name: Create config directory
   file:
-    path: /etc/letsencrypt
-    owner: root
-    group: root
+    path: "{{ item }}"
+    owner: letsencrypt
+    group: ssl-cert
     mode: 0755
     state: directory
+  with_items:
+    - /etc/letsencrypt
+    - /var/lib/letsencrypt
+    - /var/log/letsencrypt
   tags:
     - setup
     - letsencrypt

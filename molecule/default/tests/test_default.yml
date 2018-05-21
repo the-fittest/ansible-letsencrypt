@@ -4,8 +4,8 @@ file:
   /etc/letsencrypt:
     exists: true
     mode: "0755"
-    owner: root
-    group: root
+    owner: letsencrypt
+    group: ssl-cert
     filetype: directory
     contains: []
   /etc/letsencrypt/cli.ini:
