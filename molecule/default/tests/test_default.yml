@@ -3,16 +3,14 @@
 file:
   /etc/letsencrypt:
     exists: true
-    mode: "0755"
     owner: letsencrypt
     group: ssl-cert
     filetype: directory
     contains: []
   /etc/letsencrypt/cli.ini:
     exists: true
-    mode: "0644"
-    owner: root
-    group: root
+    owner: letsencrypt
+    group: ssl-cert
     filetype: file
     contains: []
 package:

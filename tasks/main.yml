@@ -53,8 +53,8 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    owner: root
-    group: root
+    owner: letsencrypt
+    group: ssl-cert
     mode: "{{ item.mode }}"
   with_items:
     - "{{ letsencrypt_config_files }}"
